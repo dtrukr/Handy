@@ -126,6 +126,21 @@ Without these tools, Handy falls back to enigo which may have limited compatibil
 
   `pkill` here simply delivers the signal—it does not terminate the process.
 
+- **macOS (BetterTouchTool, Keyboard Maestro, etc.)**: You can also toggle transcription by sending `SIGUSR2` to the running Handy app. This is near-instant and avoids synthetic keystrokes.
+
+  One-liner:
+
+  ```sh
+  pkill -USR2 -x Handy
+  ```
+
+  Or use the included helper script (optionally launches Handy if it is not running):
+
+  ```sh
+  ./scripts/handy-toggle-transcribe-macos.sh
+  ./scripts/handy-toggle-transcribe-macos.sh --launch
+  ```
+
 ### Platform Support
 
 - **macOS (both Intel and Apple Silicon)**
