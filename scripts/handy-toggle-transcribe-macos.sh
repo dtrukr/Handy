@@ -32,8 +32,15 @@ elif [[ "${1:-}" != "" ]]; then
 fi
 
 find_handy_pid() {
-  # Primary: process name.
+  # Primary: process name (macOS runs the app binary as "handy").
   local pid=""
+  pid="$(pgrep -x "handy" 2>/dev/null | head -n1 || true)"
+  if [[ -n "${pid}" ]]; then
+    echo "${pid}"
+    return 0
+  fi
+
+  # Secondary: some environments may show the process name as "Handy".
   pid="$(pgrep -x "Handy" 2>/dev/null | head -n1 || true)"
   if [[ -n "${pid}" ]]; then
     echo "${pid}"
@@ -41,7 +48,7 @@ find_handy_pid() {
   fi
 
   # Fallback: match the app bundle binary path.
-  pid="$(pgrep -f "/Handy\\.app/Contents/MacOS/Handy" 2>/dev/null | head -n1 || true)"
+  pid="$(pgrep -f "/Handy\\.app/Contents/MacOS/handy" 2>/dev/null | head -n1 || true)"
   if [[ -n "${pid}" ]]; then
     echo "${pid}"
     return 0

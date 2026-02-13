@@ -131,7 +131,7 @@ Without these tools, Handy falls back to enigo which may have limited compatibil
   One-liner:
 
   ```sh
-  pkill -USR2 -x Handy
+  pkill -USR2 -x handy
   ```
 
   Or use the included helper script (optionally launches Handy if it is not running):
